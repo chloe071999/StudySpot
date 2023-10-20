@@ -1,0 +1,67 @@
+.login-container {
+    text-align: center;
+    padding: 0 200px;
+    padding-top: 100px;
+}
+
+.login-container .user-image {
+    width: 145px;
+    height: 140px;
+}
+
+.login-main {
+    font-size: 0;
+    margin-top: 30px;
+}
+
+.form-line {
+    padding: 10px 0;
+}
+
+.form-line .label-words {
+    font-size: 18px;
+    font-weight: bold;
+    margin-right: 20px;
+}
+
+.form-line .label-input {
+    height: 30px;
+    width: 200px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.login-main .left-words {
+    display: inline-block;
+    font-size: 14px;
+    padding: 10px 20px;
+    border: 1px solid #ccc;
+    vertical-align: top;
+    cursor: pointer;
+}
+
+.login-main .right-container {
+    display: inline-block;
+    margin-left: 80px;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.login-button {
+    margin-top: 60px;
+}
+
+.right-container span {
+    display: inline-block;
+    vertical-align: top;
+    height: 42px;
+    line-height: 42px;
+}
+
+.right-container .login-icon {
+    display: inline-block;
+    width: 46px;
+    height: 42px;
+    background-size: 100% 100%;
+    background-image: url("../images/login-icon.png");
+}
