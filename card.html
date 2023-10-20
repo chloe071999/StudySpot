@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>Document</title>
+        <link rel="stylesheet" href="./css/index.css">
+    </head>
+
+    <body>
+        <nav id="nav-menu">
+            <ul>
+                <a href="index.html" class="newlogo">               
+                    <img src="./images/new logo.pic.png" width="100" alt="Study Spots logo">
+                </a>
+
+                <div class="newnav">
+                    <li >
+                        <a href="index.html">Discover</a>
+                    </li>
+                    </li>
+                    <li class="current-nav">
+                        <a href="card.html" >Visualize</a>
+                    </li>
+                    <li>
+                        <a href="user.html" >My Spots</a>
+                    </li>
+                </div>
+        </ul>
+
+    </nav>
+    <div class="home-container card-container">
+        <!--    <div class="top-line">
+            <img class="left-image" src="./images/back.png" onclick="backPage()"/>
+            <img class="logo-image" src="./images/logo.jpg"/>
+            <div class="top-words">
+                <h2 class="title-words">Brisbane Study Spots</h2>
+                <input type="text"/>
+            </div>
+            <img class="right-image" src="./images/user.jpg"/>
+        </div>-->
+        <div class="operate-line" id="top-oerate">
+            <a href="index.html"><i class="return-icon" ></i> </a>
+            <h3 class="subtitle-words">Select the most important features for your Study session</h3>
+        </div>
+        <div class="cards-bg">
+            <div class="tags-cards">
+                <img class="tags-icon wifi-icon" src="./images/Wi-Fi.png"></img>
+                <img class="tags-icon open-icon" src="./images/OpenNow.png"></img>
+                <img class="tags-icon photo-icon" src="./images/Photocopier.png"></img>
+                <img class="tags-icon digital-icon" src="./images/DigitalResourced.png"></img>
+                <img class="tags-icon accessible-icon" src="./images/Accessible.png"></img>
+                <img class="tags-icon meeting-icon" src="./images/Meetingrooms.png"></img>
+                <img class="tags-icon group-icon" src="./images/GroupFriendly.png"></img>
+                <img class="tags-icon scanner-icon" src="./images/Scanner.png"></img>
+                <img class="tags-icon noise-icon" src="./images/NoiseLevel.png"></img>
+                <img class="tags-icon outdoors-icon" src="./images/Outdoorseating.png"></img>
+            </div>
+        </div>
+
+        <div class="tags-container">
+            <span class="tags-li">Wi-Fi</span>
+            <span class="tags-li">Open Now</span>
+            <span class="tags-li">Photocopier</span>
+            <span class="tags-li">Digital Resources</span>
+            <span class="tags-li">Wheelchair accessible</span>
+            <span class="tags-li">Meeting rooms</span>
+            <span class="tags-li">Group Friendly</span>
+            <span class="tags-li">Scanner</span>
+            <span class="tags-li">Noise Level</span>
+            <span class="tags-li">Outdoor seating</span>
+        </div>
+        <div class="operate-line">
+            <span class="operate-words" onclick="jumpMain()">Show Matching Study Spots</span>
+            <i class="share-icon"></i>
+            <i class="heart-icon" onclick="likeCard()"></i>
+        </div>
+    </div>
+</body>
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script>
+    var url = window.location.href;
+    var index = url.lastIndexOf("\=");
+    var tags = url.substring(index + 1, url.length);
+    var selecttagsArr = tags.split("#");
+    selecttagsArr = selecttagsArr.slice(1);
+    for (var i = 0; i < selecttagsArr.length; i++) {
+        selecttagsArr[i] = selecttagsArr[i].replace("%20", " ")
+    }
+    var tagsArr = [
+        "Wi-Fi",
+        "Open Now",
+        "Photocopier",
+        "Digital Resources",
+        "Wheelchair accessible",
+        "Meeting rooms",
+        "Group Friendly",
+        "Scanner",
+        "Noise Level",
+        "Outdoor seating"
+    ];
+    for (var j = 0; j < selecttagsArr.length; j++) {
+        for (var i = 0; i < tagsArr.length; i++) {
+            if (tagsArr[i] == selecttagsArr[j]) {
+                console.log(i)
+                $(".tags-li")
+                    .eq(i)
+                    .addClass("tags-active");
+                $(".tags-icon")
+                    .eq(i)
+                    .css("display", "inline-block")
+            }
+        }
+    }
+    function backPage() {
+        window.location.href = "./index.html";
+
+    }
+    function jumpMain() {
+        var strings = selecttagsArr.join("#");
+        window.location.href = "./main.html?tags=" + strings;
+    }
+    function likeCard() {
+        alert("success")
+        localStorage.setItem("likeCardlist", JSON.stringify(selecttagsArr))
+    }
+</script>
+</html>

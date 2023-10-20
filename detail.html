@@ -1,0 +1,266 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>DECO7180</title>
+        <link rel="stylesheet" href="css/leaflet.css">
+        <link rel="stylesheet" href="css/main.css">
+        <link rel="stylesheet" href="css/index.css">
+
+    </head>
+
+    <body>
+        <nav id="nav-menu">
+            <ul>
+                <a href="index.html" class="newlogo">               
+                    <img src="./images/new logo.pic.png" width="100" alt="Study Spots logo">
+                </a>
+
+                <div class="newnav">
+                    <li >
+                        <a href="index.html">Discover</a>
+                    </li>
+                    </li>
+                    <li >
+                        <a href="card.html" >Visualize</a>
+                    </li>
+                    <li>
+                        <a href="user.html" >My Spots</a>
+                    </li>
+                </div>
+        </ul>
+
+    </nav>
+    <div class = "container card-container home-container" id="detail-container">
+        <!--    <div class="top-line">
+            <img class="left-image" src="./images/back.png" onclick="backPage()"/>
+            <img class="logo-image" src="./images/logo.jpg"/>
+            <div class="top-words">
+                <h2 class="title-words">Brisbane Study Spots</h2>
+                <input type="text"/>
+            </div>
+            <img onclick="jumpUser()" class="right-image" src="./images/user.jpg"/>
+        </div>-->
+        <div id="detail-main">
+            <div class="left-container">
+                <div class="top-image">
+                    <img id="top-image" src=""/>
+                </div>
+                <div class="center-images">
+                    <img id="center-image1" src=""/>
+                    <img id="center-image2" src=""/>
+
+                </div>
+            </div>
+            <div class="right-container">
+                <div class="library-title">
+                    <span></span>
+                    <div class="star-container">
+                        <i class="starfill-icon"></i>
+                        <i class="starfill-icon"></i>
+                        <i class="starfill-icon"></i>
+                        <i class="starfill-icon"></i>
+                        <i class="star-icon"></i>
+                    </div>
+                </div>
+                <div class="summary-words"></div>
+                <div class="time-container">
+                    <div class="normal-words">open now!</div>
+                    <div class="timer-main">
+                        <div class="open-time">
+                            <div class="blue-words">opening hours</div>
+                            <div class="open-time-words"></div>
+                        </div>
+                        <div class="amentities-time">
+                            <div class="blue-words">amentities & features</div>
+                            <div class="amentities-time-words">After hours chufe</br>Books</div>
+                    </div>
+                    <div class="operate-line">
+                        <i class="share-icon"></i>
+                        <i class="heart-icon" onclick="likeLibrary()"></i>
+                    </div>
+                </div>
+                <!--Reviews-->
+                <div class="reviews-container">
+                    <div class="left-reviews">
+                        <div class="blue-words">Reviews</div>
+                        <!--     <div class="reviews-title">
+                            <span>Kylie</span>
+                            <div class="star-container">
+                                <i class="starfill-icon"></i>
+                                <i class="starfill-icon"></i>
+                                <i class="starfill-icon"></i>
+                                <i class="starfill-icon"></i>
+                                <i class="star-icon"></i>
+                            </div>
+                        </div>-->
+                        <div class="reviews-desc"></div>
+                        <!--  <div class="reviews-title">
+                            <span>Mason</span>
+                            <div class="star-container">
+                                <i class="starfill-icon"></i>
+                                <i class="starfill-icon"></i>
+                                <i class="starfill-icon"></i>
+                                <i class="starfill-icon"></i>
+                                <i class="star-icon"></i>
+                            </div>
+                        </div>
+                        <div class="reviews-desc">Greate Spot to Study,WIFI </div>
+                        <div class="reviews-title">
+                            <span>Sara</span>
+                            <div class="star-container">
+                                <i class="starfill-icon"></i>
+                                <i class="starfill-icon"></i>
+                                <i class="starfill-icon"></i>
+                                <i class="starfill-icon"></i>
+                                <i class="star-icon"></i>
+                            </div>
+                        </div>
+                        <div class="reviews-desc">Greate Spot to Study,WIFI </div>-->
+                    </div>
+                    <div class="right-reviews">
+                        <div class="blue-words">My Rating & Review</div>
+                        <div class="star-container">
+                            <i class="star-icon"></i>
+                            <i class="star-icon"></i>
+                            <i class="star-icon"></i>
+                            <i class="star-icon"></i>
+                            <i class="star-icon"></i>
+                        </div>
+                        <textarea id="reviews-msg" class="reviews-textarea"></textarea>
+                        <div class="reviews-button">
+                            <span onclick="clearMsg()">Cancel</span>
+                            <span style="margin-left:10px" onclick="submitMsg()">Submit</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script src="js/leaflet.js"></script>
+<script>
+    function backPage() {
+        window
+            .history
+            .go(-1)
+    }
+    var detailObj = {};
+    getData()
+    function getData() {
+        if (localStorage.getItem("libiraryItem")) {
+            detailObj = JSON.parse(localStorage.getItem("libiraryItem"));
+            console.log(detailObj)
+            $(".library-title span").html(detailObj.Venue)
+            $(".summary-words").html(detailObj.Summary)
+            $(".open-time-words").html(detailObj.Open)
+        }
+    }
+    function jumpUser() {
+        window.location.href = "./user.html";
+
+    }
+    function submitMsg() {
+        var value = $("#reviews-msg").val();
+        $(".reviews-desc").html(value)
+    }
+    function clearMsg() {
+        $(".reviews-desc").html("")
+    }
+    function likeLibrary() {
+        var libraryList = JSON.parse(localStorage.getItem("libraryList")) || [];
+        detailObj = JSON.parse(localStorage.getItem("libiraryItem"));
+        console.log(libraryList)
+        var libraryListC = JSON.parse(JSON.stringify(libraryList))
+        if (libraryList.length) {
+            var flag = false;
+            for (var i = 0; i < libraryList.length; i++) {
+                if (detailObj._id == libraryList[i]._id) {
+                    flag = true;
+                    alert("data repeat");
+                    break;
+                }
+            }
+            if (!flag) {
+                libraryListC.push(detailObj);
+                console.log(libraryListC)
+                alert("success")
+                localStorage.setItem("libraryList", JSON.stringify(libraryListC))
+            }
+        } else {
+            libraryList.push(detailObj);
+            alert("success")
+            localStorage.setItem("libraryList", JSON.stringify(libraryList))
+        }
+
+    }
+    drawImage()
+    function drawImage() {
+        console.log()
+        var imgArr = [
+            'https://www.mustdobrisbane.com/sites/default/files/styles/mdb_full_width/public/images/Braille-House-2.JPG?itok=gAKWrCVD',
+            'https://www.brisbane.qld.gov.au/sites/default/files/styles/hero_image_mobile/public/ashgrove-library_7.jpg?itok=RfJqTCzi',
+            'https://austbuildsupplies.com.au/s__cdn/assets/uploads/f28c509ea21b03ebd9d070820e5848d5_-queensland-brisbane-city-banyo-banyo-library-07-3403-2200html.jpg',
+            'https://www.brisbane.qld.gov.au/sites/default/files/styles/hero_image_mobile/public/1600x850bracken-ridge-internal.jpg?itok=gnPk2IwO',
+            'https://brisbanekids.com.au/wp-content/uploads/2015/11/101-703x468.jpg',
+            'https://www.brisbane.qld.gov.au/sites/default/files/styles/hero_image_mobile/public/libraries/bulimba-library_5.jpg?itok=cxDtqDZS',
+            'https://www.brisbane.qld.gov.au/sites/default/files/styles/hero_image_mobile/public/carina-library_13.jpg?itok=hSmjd97H',
+            'https://pr1.nicelocal.com.au/U8oc89drTrsfdz5e2JR9WA/587x440,q85/4px-BW84_n0QJGVPszge3NRBsKw-2VcOifrJIjPYFYkOtaCZxxXQ2XXZZ01IDClKX6DDbQ31CqYrdOxqKpQHw2fmZsOr1h48mrETsMYZnyp9ErPH2rGAOQ',
+            'http://dotdash.com.au/assets/img/made/assets/img/projects/171220_Projects_ChermsideLibrary_03_1412_696_85_c1.jpg',
+            'https://ajem.infoservices.com.au/htmlimages/AJEM-27-01-15?image=Coopers%20Plains%20library.png',
+            'https://content.api.news/v3/images/bin/c82f45a5ecbf73ab51e2b3849f80bf08',
+            'https://www.brisbane.qld.gov.au/sites/default/files/styles/hero_image_mobile/public/libraries/everton-park-library_1.jpg?itok=yg5VBzZ5',
+            'https://www.fairfieldcity.nsw.gov.au/files/assets/public/images/your_council/blog/new-library-library-opens-2021.jpg?dimension=pageimagefullwidth&w=1140',
+            'http://www.yourneighbourhood.com.au/wp-content/uploads/2017/07/7-10.jpg',
+            'https://www.brisbane.qld.gov.au/sites/default/files/styles/hero_image_mobile/public/libraries/grange_c.jpg?itok=7-cgZ_JW',
+            'http://static1.squarespace.com/static/59de7b08268b96c326bedc1e/5f5bc7716fd4db513f190210/5f625c336db8cf1ca97cd8a6/1657736407204/?format=1500w',
+            'https://www.brisbane.qld.gov.au/sites/default/files/styles/hero_image_mobile/public/holland-park-library_2.jpg?itok=BQpLyE1g',
+            'https://www.brisbane.qld.gov.au/sites/default/files/styles/hero_image_mobile/public/inala-library_6.jpg?itok=mIa8UGSw',
+            'http://www.buildingwork.design/wp-content/uploads/LS20110816_kenmorelibrary_006-slideshow.jpg'
+        ]
+        var cafaData = [
+
+            'https://images.happycow.net/venues/1024/22/33/hcmp223304_1046197.jpeg',
+            'https://dynamic.activeactivities.com.au/files/listings/0/0/9/196009/images//29593.JPG',
+            'https://www.mustdobrisbane.com/sites/default/files/styles/mdb_article_full/public/brew.jpg?itok=IDUnn3rn',
+            'https://www.mustdobrisbane.com/sites/default/files/styles/mdb_article_full/public/tthe-library-cafe.jpg?itok=cO5fMJAI',
+            'https://fastly.4sqi.net/img/general/600x600/1609004_77_TfRL2TGmrmq7IaF9qkegb3CiwyNW6SBpno6k2d2A.jpg',
+            'https://eatsouthbank.com.au/wp-content/uploads/2014/12/SLQ-cropped.jpg',
+            'https://s3-media0.fl.yelpcdn.com/bphoto/OWlTNIX2HZMO_DwbgW3WTw/348s.jpg',
+            'https://fastly.4sqi.net/img/general/600x600/XAPAFSQAXAW3DNPOXNHKFAAJ33IJXNVCDFKDFGOJZLT1LHBU.jpg',
+            'https://b.zmtcdn.com/data/reviews_photos/b1a/849a73eb3cd7acb79fa09a60dd7e0b1a_1560054873.jpg',
+            'https://fastly.4sqi.net/img/general/600x600/xOPwunFVlDBW1oUNNQz9nb8lDpHKRdYvljdhrq-kXZw.jpg',
+            'https://b.zmtcdn.com/data/pictures/4/16593134/4d66b68fc6aa411929260e6c623ce238.jpg',
+            'https://s3-media0.fl.yelpcdn.com/bphoto/CmwD0jw5_WNW8xi48KhdMg/348s.jpg',
+            'https://b.zmtcdn.com/data/pictures/2/16591052/e848759abbb3a8e24546eda7d4c50712.jpg',
+            'https://b.zmtcdn.com/data/pictures/2/16591052/a2131676a4eb9f50750463fe93d37391.jpg',
+            'https://theweekendedition.com.au/wp-content/uploads/2012/08/ugees-1100x550-c-center.jpg',
+            'https://www.mustdobrisbane.com/sites/default/files/styles/mdb_article_full/public/featured/Chouquette-CBD-hero.JPG?itok=eBN3QSz2',
+            'https://cdn.broadsheet.com.au/cache/d5/de/d5de0dbdb13542044dcae492dada6cdf.jpg',
+            'https://cdn.broadsheet.com.au/cache/1d/ec/1decb20b1dc014a8d343a5282411c168.jpg',
+            'https://s3-media0.fl.yelpcdn.com/bphoto/NKukDyts3STsrlfNQ__YUA/348s.jpg',
+            'https://s3-media0.fl.yelpcdn.com/bphoto/yZS-OTGQPX5mXQmJLCYylA/348s.jpg'
+        ]
+        var index1 = Math.floor(Math.random() * 19);
+        var index2 = Math.floor(Math.random() * 19);
+        var index3 = Math.floor(Math.random() * 19);
+        console.log(index1)
+        console.log(index2)
+        console.log(index3)
+        detailObj = JSON.parse(localStorage.getItem("libiraryItem"));
+        if (detailObj.cafeFlag) {
+            $("#top-image").attr("src", cafaData[index1])
+            $("#center-image1").attr("src", cafaData[index2])
+            $("#center-image2").attr("src", cafaData[index3])
+        } else {
+            $("#top-image").attr("src", imgArr[index1])
+            $("#center-image1").attr("src", imgArr[index2])
+            $("#center-image2").attr("src", imgArr[index3])
+        }
+
+    }
+</script>
+
+</body>
+</html>

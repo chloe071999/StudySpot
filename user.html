@@ -1,0 +1,139 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>DECO7180</title>
+        <link rel="stylesheet" href="css/leaflet.css">
+        <link rel="stylesheet" href="css/main.css">
+        <link rel="stylesheet" href="css/index.css">
+
+    </head>
+
+    <body>
+        <nav id="nav-menu">
+            <ul>
+                <a href="index.html" class="newlogo">               
+                    <img src="./images/new logo.pic.png" width="120%" alt="Study Spots logo">
+                </a>
+
+                <div class="newnav">
+                    <li >
+                        <a href="index.html">Discover</a>
+                    </li>
+                    </li>
+                    <li >
+                        <a href="card.html" >Visualize</a>
+                    </li>
+                    <li class="current-nav">
+                        <a href="user.html" >My Spots</a>
+                    </li>
+                </div>
+        </ul>
+
+    </nav>
+    <div class = "container card-container home-container user-container" id="detail-container">
+        <!--   <div class="top-line">
+            <img class="left-image" src="./images/back.png" onclick="backPage()"/>
+            <img class="logo-image" src="./images/logo.jpg"/>
+            <div class="top-words">
+                <h2 class="title-words">Brisbane Study Spots</h2>
+                <input type="text"/>
+            </div>
+            <img class="right-image" src="./images/user.jpg"/>
+        </div>-->
+        <div class="user-main">
+            <div class="user-block left-user">
+                <div class="user-block-title">My Cards</div>
+                <div><img src="../images/CardCreation2.png" alt="" width="120%"></div>
+                <div class="user-block-ul">
+                    <div class="cards-bg">
+                        <!-- <div class="tags-cards user-cards">
+                            <img class="tags-icon wifi-icon" src="./images/Wi-Fi.png"></img>
+                            <img class="tags-icon open-icon" src="./images/OpenNow.png"></img>
+                            <img class="tags-icon photo-icon" src="./images/Photocopier.png"></img>
+                            <img class="tags-icon digital-icon" src="./images/DigitalResourced.png"></img>
+                            <img class="tags-icon accessible-icon" src="./images/Accessible.png"></img>
+                            <img class="tags-icon meeting-icon" src="./images/Meetingrooms.png"></img>
+                            <img class="tags-icon group-icon" src="./images/GroupFriendly.png"></img>
+                            <img class="tags-icon scanner-icon" src="./images/Scanner.png"></img>
+                            <img class="tags-icon noise-icon" src="./images/NoiseLevel.png"></img>
+                            <img class="tags-icon outdoors-icon" src="./images/Outdoorseating.png"></img>
+                        </div> -->
+                    </div>
+                </div>
+                <div class="tags-container user-tags-container">
+                    <span class="tags-li user-page-tages">Open Now</span>
+                    <span class="tags-li user-page-tages">Group Friendly</span>
+                    <span class="tags-li user-page-tages">Photocopier</span>
+                    <span class="tags-li user-page-tages">Cafe</span>
+                    <span class="tags-li user-page-tages">Printingfacilities</span>
+                </div>
+            </div>
+            <div class="user-block right-user">
+                <div class="user-block-title">Favourtite Study Spots</div>
+                <div class="library-ul">
+                    <div class="library-title"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script src="js/leaflet.js"></script>
+<script>
+    function backPage() {
+        window
+            .history
+            .go(-1)
+    }
+    var detailObj = {};
+    getData();
+    getCard();
+
+    function getData() {
+        if (localStorage.getItem("libraryList")) {
+            var libraryList = JSON.parse(localStorage.getItem("libraryList"));
+            console.log(libraryList)
+            var html = ""
+            for (var i = 0; i < libraryList.length; i++) {
+                var item = libraryList[i];
+                html += '<div class="library-title">' + item["Venue"] + '</div>'
+            }
+            $(".library-ul").html(html)
+        }
+    }
+    function getCard() {
+        if (localStorage.getItem("likeCardlist")) {
+            var likeCardlist = JSON.parse(localStorage.getItem("likeCardlist"));
+            console.log(likeCardlist)
+            var tagsArr = [
+                "Wi-Fi",
+                "Open Now",
+                "Photocopier",
+                "Digital Resources",
+                "Wheelchair accessible",
+                "Meeting rooms",
+                "Group Friendly",
+                "Scanner",
+                "Noise Level",
+                "Outdoor seating"
+            ];
+
+            for (var i = 0; i < likeCardlist.length; i++) {
+                var name = likeCardlist[i];
+                var index = tagsArr.indexOf(name);
+                console.log(index)
+                $(".tags-li")
+                    .eq(i)
+                    .addClass("tags-active");
+                $(".tags-icon")
+                    .eq(i)
+                    .css("display", "inline-block")
+            }
+
+        }
+    }
+</script>
+
+</body>
+</html>

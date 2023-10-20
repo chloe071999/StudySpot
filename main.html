@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>DECO7180</title>
+        <link rel="stylesheet" href="css/leaflet.css">
+        <link rel="stylesheet" href="css/main.css">
+        <link rel="stylesheet" href="css/index.css">
+
+    </head>
+
+    <body>
+        <nav id="nav-menu">
+            <ul>
+                <a href="index.html" class="newlogo">               
+                    <img src="./images/new logo.pic.png" width="100" alt="Study Spots logo">
+                </a>
+
+
+                <div class="newnav">
+                    <li>
+                        <a href="index.html">Discover</a>
+                    </li>
+                    </li>
+                    <li >
+                        <a href="card.html" >Visualize</a>
+                    </li>
+                    <li>
+                        <a href="user.html" >My Spots</a>
+                    </li>
+                </div>
+        </ul>
+
+    </nav>
+    <div class = "container card-container home-container" id="main-container">
+        <!-- <div class="top-line">
+            <img class="left-image" src="./images/back.png" onclick="backPage()"/>
+            <img class="logo-image" src="./images/logo.jpg"/>
+            <div class="top-words">
+                <h2 class="title-words">Brisbane Study Spots</h2>
+                <input type="text"/>
+            </div>
+            <img class="right-image" src="./images/user.jpg" onclick="jumpUser()"/>
+        </div>-->
+        <div id="main">
+            <div class="left-container">
+                <div class="tags-container">
+                    <span class="tags-li">Wi-Fi</span>
+                    <span class="tags-li">Open Now</span>
+                    <span class="tags-li">Photocopier</span>
+                    <span class="tags-li">Digital Resourced</span>
+                    <span class="tags-li">Accessible</span>
+                    <span class="tags-li">Meeting rooms</span>
+                    <span class="tags-li">Group Friendly</span>
+                    <span class="tags-li">Scanner</span>
+                    <span class="tags-li">Noise Level</span>
+                    <span class="tags-li">Outdoor seating</span>
+                </div>
+                <input type = "text" id = "namelibrary" placeholder="Please input hotspot name" value = "" size="28">
+                <input type = "button" name = "submit"  value = "submit" id = "submit">
+                <article id="map"></article>
+                <p id = "description" ></p>
+            </div>
+            <div class="right-container">
+                <div class="library-ul">
+                    <!--     <div class="library-li">
+                            <div class="library-title">
+                                <span>Independent Library Service</span>
+                            </div>
+                            <div class="time-container">
+                                <span class="blue-words">open now!</span>
+                                <span>opening hours:8:00-17:00</span>
+                            </div>
+                            <div class="star-container">
+                                <i class="starfill-icon"></i>
+                                <i class="starfill-icon"></i>
+                                <i class="starfill-icon"></i>
+                                <i class="starfill-icon"></i>
+                                <i class="star-icon"></i>
+                            </div>
+                            <div class="tag-container">
+                            Tags:<span class="normal-words">#aa</span>
+                            </div>
+                            <div class="more-container">
+                            >>more information & reviews
+                            </div>
+                        </div>-->
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script src="js/leaflet.js"></script>
+    <script type="text/javascript" src="./js/data.json"></script>
+    <script src="js/script.js"></script>
+    <script>
+        initTags()
+        function initTags() {
+            var url = window.location.href;
+            var index = url.lastIndexOf("\=");
+            var tags = url.substring(index + 1, url.length);
+            var selecttagsArr = tags.split("#");
+            selecttagsArr = selecttagsArr.slice(1);
+            console.log(selecttagsArr)
+            for (var i = 0; i < selecttagsArr.length; i++) {
+                selecttagsArr[i] = selecttagsArr[i].replace("%20", " ")
+            }
+            var tagsArr = [
+                "Wi-Fi",
+                "Open Now",
+                "Photocopier",
+                "Digital Resources",
+                "Wheelchair accessible",
+                "Meeting rooms",
+                "Group Friendly",
+                "Scanner",
+                "Noise Level",
+                "Outdoor seating"
+            ];
+            for (var j = 0; j < selecttagsArr.length; j++) {
+                for (var i = 0; i < tagsArr.length; i++) {
+                    if (tagsArr[i] == selecttagsArr[j]) {
+                        console.log(i)
+                        $(".tags-li")
+                            .eq(i)
+                            .addClass("tags-active");
+                    }
+                }
+            }
+        }
+        function backPage() {
+            window.location.href = "./index.html";
+
+        }
+        function jumpUser() {
+            window.location.href = "./user.html";
+
+        }
+    </script>
+
+</body>
+</html>
